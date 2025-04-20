@@ -56,3 +56,51 @@ toggleButton.addEventListener('click', () => {
         newElementAdded = false;
     }
 });
+// Function to change text content dynamically
+function updateArticleTitle(newTitle) {
+    const titleElement = document.getElementById('article-title');
+    if (titleElement) {
+        titleElement.textContent = newTitle;
+    }
+}
+
+// Call the function after a short delay
+setTimeout(() => {
+    updateArticleTitle('Dynamically Updated Title!');
+}, 1500);
+
+// Function to modify CSS styles via JavaScript
+const styleButton = document.getElementById('styleButton');
+const articleContent = document.getElementById('article-content');
+
+styleButton.addEventListener('click', () => {
+    if (articleContent) {
+        articleContent.classList.toggle('styled-text'); // Toggles a CSS class
+    }
+});
+
+// Function to add or remove an element when a button is clicked
+const addElementButton = document.getElementById('addElementButton');
+const dynamicElementsContainer = document.getElementById('dynamic-elements');
+let elementCounter = 1;
+let lastAddedElement = null;
+
+addElementButton.addEventListener('click', () => {
+    if (!lastAddedElement) {
+        // Add a new element
+        const newSection = document.createElement('section');
+        newSection.classList.add('new-section');
+        newSection.innerHTML = `<p>This is a dynamically added section #${elementCounter}.</p>`;
+        dynamicElementsContainer.appendChild(newSection);
+        lastAddedElement = newSection;
+        addElementButton.textContent = 'Remove Last Section';
+        elementCounter++;
+    } else {
+        // Remove the last added element
+        if (dynamicElementsContainer.contains(lastAddedElement)) {
+            dynamicElementsContainer.removeChild(lastAddedElement);
+            lastAddedElement = null;
+            addElementButton.textContent = 'Add New Section';
+        }
+    }
+});
